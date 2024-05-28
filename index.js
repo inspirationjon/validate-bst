@@ -8,7 +8,18 @@ class BST {
 }
 
 function validateBst(tree) {
-  // Write your code here.
+  return validateBstHelper(tree, -Infinity, Infinity);
+}
+
+function validateBstHelper(tree, minValue, maxValue) {
+  if (tree === null) return true;
+
+  if (tree.value < minValue || tree.value >= maxValue) return false;
+
+  const isLeftValid = validateBstHelper(tree.left, minValue, tree.value);
+  const isRightValid = validateBstHelper(tree.right, tree.value, maxValue);
+
+  return isLeftValid && isRightValid;
 }
 
 // Do not edit the line below.
